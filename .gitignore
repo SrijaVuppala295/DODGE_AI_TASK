@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Environment variables — NEVER commit secrets!
+.env
+*.env
+
+# SQLite Database — contains real data, exclude from repo
+backend/order_to_cash.db
+*.db
+*.sqlite
+
+# Logs
+*.log
+
+# Node.js / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Misc
+*.bak
+*.tmp

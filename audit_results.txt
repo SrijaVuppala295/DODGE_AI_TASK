@@ -1,0 +1,22 @@
+﻿FOUND DATA AT: C:\Users\Manikanta\Downloads\sap-order-to-cash-dataset\sap-o2c-data
+TABLE NAME                               | RAW (JSONL)  | DB (SQLITE)  | STATUS    
+--------------------------------------------------------------------------------
+billing_document_cancellations           | 80           | 80           | OK        
+billing_document_headers                 | 163          | 163          | OK        
+billing_document_items                   | 245          | 245          | OK        
+business_partner_addresses               | 8            | 8            | OK        
+business_partners                        | 8            | 8            | OK        
+customer_company_assignments             | 8            | 8            | OK        
+customer_sales_area_assignments          | 28           | 28           | OK        
+journal_entry_items_accounts_receivable  | 123          | 123          | OK        
+outbound_delivery_headers                | 86           | 86           | OK        
+outbound_delivery_items                  | 137          | 137          | OK        
+payments_accounts_receivable             | 120          | 120          | OK        
+plants                                   | 44           | 44           | OK        
+product_descriptions                     | 69           | 69           | OK        
+product_plants                           | 3036         | 3036         | OK        
+product_storage_locations                | 16723        | 16723        | OK        
+products                                 | 69           | 69           | OK        
+sales_order_headers                      | 100          | 100          | OK        
+sales_order_items                        | 167          | 167          | OK        
+sales_order_schedule_lines               | 179          | 179          | OK        
