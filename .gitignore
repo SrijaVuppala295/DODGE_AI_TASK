@@ -17,8 +17,8 @@ env/
 .env
 *.env
 
-# SQLite Database — contains real data, exclude from repo
-backend/order_to_cash.db
+# SQLite Database — allow the main app DB, exclude others
+!backend/order_to_cash.db
 *.db
 *.sqlite
 
