@@ -30,7 +30,7 @@ The system also includes **trace flows, anomaly detection, and guardrails** to e
 ![Node Popup](assets/3.jpeg)
 
 ### Broken Flows Analysis
-![Broken Flows](assets/Screenshot 2026-03-26 030201.png)
+![Broken Flows](assets/4.jpeg)
 
 ### Guardrails Analysis
 ![Broken Flows](assets/5.jpeg)
