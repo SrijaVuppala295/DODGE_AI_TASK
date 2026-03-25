@@ -17,10 +17,10 @@ env/
 .env
 *.env
 
-# SQLite Database — allow the main app DB, exclude others
-!backend/order_to_cash.db
+# SQLite Database — exclude all .db files except the main app DB
 *.db
 *.sqlite
+!backend/order_to_cash.db
 
 # Logs
 *.log
