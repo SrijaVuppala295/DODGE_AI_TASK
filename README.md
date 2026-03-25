@@ -1,7 +1,12 @@
 # 🚀 Order-to-Cash AI Agent — Graph-Based Data Modeling & Query System
 
-> **Submission for Forward Deployed Engineer Take-Home Assignment**
-> Built by: Srija Vuppala | Deadline: 26 March 2026, 11:59 PM IST
+## Overview
+
+This project builds an **Order-to-Cash Graph API** that transforms ERP data (orders, deliveries, billing, and payments) into an interactive graph model.
+It enables users to **visualize relationships between entities** and explore data through node expansion and metadata views.
+A conversational interface powered by an LLM converts natural language queries into SQL, executes them on the database, and returns grounded insights.
+The system also includes **trace flows, anomaly detection, and guardrails** to ensure accurate and domain-relevant responses.
+
 
 ---
 
@@ -9,28 +14,26 @@
 
 | Resource | URL |
 |---|---|
-| 🌐 Live Demo (Backend API) | *[Add Render URL after deployment]* |
-| 🖥️ Live Demo (Frontend UI) | *[Add Vercel/Netlify URL after deployment]* |
-| 📦 GitHub Repo | https://github.com/SrijaVuppala295/DODGE_AI_TASK |
+| 🌐 Live Demo |https://dodge-ai-task-phi.vercel.app/|
 
 ---
 
 ## 📸 Screenshots
 
-> **[Add your screenshots here before final submission]**
-> Drag and drop images directly into this file on GitHub, or save them to a `/screenshots` folder and reference them below.
-
 ### Graph Visualization
-![Graph View](screenshots/graph_view.png)
+![Graph View](assets/1.jpeg)
 
 ### AI Chat Interface
-![Chat Interface](screenshots/chat_interface.png)
+![Chat Interface](assets/2.jpeg)
 
 ### Node Expansion & Metadata
-![Node Popup](screenshots/node_popup.png)
+![Node Popup](assets/3.jpeg)
 
 ### Broken Flows Analysis
-![Broken Flows](screenshots/broken_flows.png)
+![Broken Flows](assets/4.jpeg)
+
+### Guardrails Analysis
+![Broken Flows](assets/5.jpeg)
 
 ---
 
@@ -52,7 +55,7 @@
 │                                                              │
 │  ┌─────────────┐  ┌──────────────┐  ┌────────────────────┐  │
 │  │ Graph Engine │  │  LLM Router  │  │  Guardrails Layer  │  │
-│  │ get_graph()  │  │ Groq (11keys)│  │  Keyword + LLM     │  │
+│  │ get_graph()  │  │ Groq API KEYS│  │  Keyword + LLM     │  │
 │  └──────┬───────┘  └──────┬───────┘  └────────────────────┘  │
 │         │                 │                                    │
 │  ┌──────▼─────────────────▼───────────────────────────────┐  │
@@ -117,7 +120,7 @@ The graph seeds simultaneously from **Customers**, **Billing Documents**, and **
 
 ### Model
 - **Groq API** (`llama-3.3-70b-versatile`) — fast inference, free tier
-- **11 API keys in rotation** — prevents rate limiting; automatically falls back to next key
+- **API keys in rotation** — prevents rate limiting; automatically falls back to next key
 
 ### Prompting Architecture
 
@@ -173,23 +176,6 @@ A **two-layer** guardrail system:
 | *"Show sales orders delivered but not billed"* | SQL: `overallDeliveryStatus='C' AND overallOrdReltdBillgStatus IN ('A','B')` |
 | *"Tell me about Business Partner 320000083"* | SQL lookup on `business_partners` JOIN `sales_order_headers` |
 | *"Tell me about Journal Entry 9400172476"* | SQL on `payments_accounts_receivable WHERE accountingDocument='9400172476'` |
-
----
-
-## ✨ Bonus Features Implemented
-
-| Feature | Status |
-|---|---|
-| ✅ Natural Language → SQL translation | Implemented |
-| ✅ **Streaming LLM responses** (SSE) | `/api/chat/stream` endpoint |
-| ✅ **Node highlighting** | Graph highlights entities referenced in query results |
-| ✅ **Conversation memory** | Last 6 messages passed as context |
-| ✅ **Semantic/fuzzy search** | Fallback search when exact SQL returns 0 results |
-| ✅ **Graph clustering** via node type coloring | Color-coded by entity type |
-| ✅ **Broken flow analytics** | `/api/analysis/broken-flows` — 4 categories with counts |
-| ✅ **Node expansion** | Double-click any node to expand its children |
-| ✅ **Document trace** | Full O2C flow trace for any Sales Order or Billing Document |
-| ✅ **Multi-key LLM rotation** | 11 Groq API keys rotated automatically |
 
 ---
 
