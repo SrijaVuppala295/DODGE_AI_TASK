@@ -66,20 +66,41 @@ The system also includes **trace flows, anomaly detection, and guardrails** to e
 ```
 
 ---
-
-## 🧠 Database Choice & Rationale
-
-**Choice: SQLite**
-
-| Decision | Rationale |
-|---|---|
-| SQLite over PostgreSQL | Zero-config, file-based, no external server needed for hackathon |
-| Relational model over graph DB | Dataset is inherently tabular (SAP ERP format); SQL JOINs map naturally to graph edges |
-| Single `.db` file | Simplifies deployment — the database ships with the code |
-| Indexed text IDs | All entity IDs (`salesOrder`, `billingDocument`, etc.) are TEXT — matching real SAP formats |
-
-The database is pre-populated via `load_data.py`, which ingests raw CSV/Excel files from the dataset. The graph is **computed at runtime** from relational data, not stored separately.
-
+## Architecture Decisions
+ 
+> The system is split into two independent services:
+ 
+**Backend — FastAPI (Python)**
+Handles all data access, graph construction, SQL generation, and LLM calls. Kept separate from the frontend so the LLM logic and database are never exposed to the client. Deployed on Render.
+ 
+**Frontend — React + Vite**
+Renders the D3.js force graph and chat interface. Communicates with the backend via REST and Server-Sent Events for streaming. Deployed on Vercel.
+ 
+```
+User → React (Vercel)
+          ↓ REST / SSE
+       FastAPI (Render)
+          ↓              ↓
+       SQLite DB       Groq API
+```
+ 
+**Why this split?**  
+The API key, SQL execution, and LLM prompts are all server-side. The frontend only receives final answers and graph data — no raw data or credentials are exposed.
+ 
+---
+ 
+## Database Choice — SQLite
+ 
+The dataset (19 tables, ~1MB) is loaded from JSONL files into a single SQLite file at startup using `load_data.py`.
+ 
+**Why SQLite:**
+- Zero configuration — no separate database server needed
+- The dataset is read-only after loading, so SQLite's write limitations don't matter
+- Fast enough for analytical SELECT queries on this data size
+- Single file makes deployment simple — the `.db` file is committed to the repo alongside the backend
+ 
+**Trade-off:** If the dataset grew to millions of rows or needed concurrent writes, PostgreSQL would be the right choice. For this assignment, SQLite is the right fit.
+ 
 ---
 
 ## 📊 Graph Modelling
